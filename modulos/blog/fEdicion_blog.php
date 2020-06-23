@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["status"])){
+  header("Location: ../../index.php");
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>

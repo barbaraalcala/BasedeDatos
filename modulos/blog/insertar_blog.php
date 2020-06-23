@@ -14,15 +14,9 @@ $autor = $_POST['autor'];
 $consulta ="INSERT INTO blog (titulo, descripcion, fecha, autor) 
 	VALUES ('$titulo', '$descripcion', '$fecha','$autor')";
 
-echo $consulta;
-
 //Ejecutar la consulta
 mysqli_query($mysqli, $consulta);
 //Regresar al Index
-header("Location: index.php")
-
-
-
-
+header("Location: index.php");
 
 ?>
