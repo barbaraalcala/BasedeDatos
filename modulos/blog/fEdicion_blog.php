@@ -4,9 +4,8 @@ session_start();
 if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["status"])){
   header("Location: ../../index.php");
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -19,9 +18,9 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
 <body>
 <?php require_once '../../conexion.php'; 
   $id = $_GET["id"];
-  $consulta  = "SELECT * FROM blog where id = $id";
+  $consulta = "SELECT * FROM blog as bg INNER JOIN categorias as ct ON ct.id = bg.id_cat_fk where bg.id = $id";
   $resultado = mysqli_query($mysqli, $consulta);
-  $fila = mysqli_fetch_array($resultado);
+  while($fila = mysqli_fetch_array($resultado)){
 ?>
 
 
@@ -50,6 +49,23 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
       <label for="nombre">Autor</label>
       <input type="text" name="autor" id="nombre" value="<?php echo $fila["autor"]; ?>">    
   </div>
+
+  <div class="form-group">
+      <label for="nombre">Categoria</label>
+      <select name="categoria" id="categoria">
+      <?php
+      $consulta_categoria = "SELECT * FROM categorias";
+      $resultado_categoria = mysqli_query($mysqli, $consulta_categoria);
+      while($fila_cat = mysqli_fetch_array($resultado_categoria)){
+      ?>
+        <option value="<?php echo $fila_cat["id"]; ?>" <?php if($fila_cat["id"] == $fila["id"]) echo 'selected' ?>><?php echo $fila_cat["nombre_titulo"]; ?></option>
+
+        <?php 
+        }
+        ?>
+      </select>
+      </div>
+
   <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 <div class="form-group">
   <input type="submit"  name="btnEnviar" value ="Registra tu dato" class="btn btn-success">  
@@ -59,6 +75,7 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
 </div>
 </div>
 </div>
+<?php } ?>
 
 
   <!-- JS, Popper.js, and jQuery -->

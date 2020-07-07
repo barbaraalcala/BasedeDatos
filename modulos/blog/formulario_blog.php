@@ -4,9 +4,8 @@ session_start();
 if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["status"])){
   header("Location: ../../index.php");
 }
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -19,7 +18,9 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
 <body>
 <?php
 //TABLA BLOG
- require_once '../../conexion.php'; ?>
+ require_once '../../conexion.php'; 
+ $consulta_categoria = "SELECT * FROM categorias";
+ ?>
 
  <!--Estetica-->
 <div class="container mt-5">
@@ -45,6 +46,21 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
     <div class="form-group">
       <label for="nombre">Autor</label>
       <input type="text" name="autor" id="nombre" placeholder="Ingresa el autor">    
+  </div>
+
+  <div class="form-group">
+      <label for="nombre">Categoria</label>
+      <select name="categoria" id="categoria">
+      <?php
+      $resultado_categoria = mysqli_query($mysqli, $consulta_categoria);
+      while($fila = mysqli_fetch_array($resultado_categoria)){
+      ?>
+        <option value="<?php echo $fila["id"]; ?>"><?php echo $fila["nombre_titulo"]; ?></option>
+
+        <?php 
+        }
+        ?>
+      </select>
   </div>
 
 <div class="form-group">

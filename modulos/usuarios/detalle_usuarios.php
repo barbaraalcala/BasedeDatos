@@ -4,8 +4,6 @@ session_start();
 if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["status"])){
   header("Location: ../../index.php");
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +11,7 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de usuarios</title>
+  <title>GESTIÓN DE USUARIOS</title>
   <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>

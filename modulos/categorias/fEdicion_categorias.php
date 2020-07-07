@@ -11,43 +11,32 @@ if(!isset($_SESSION["id"]) && !isset($_SESSION["nombre"]) && !isset($_SESSION["s
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GESTIÓN DE USUARIOS</title>
+  <title>CATEGORIAS</title>
   <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body>
-<?php require_once '../../conexion.php'; ?>
+<?php require_once '../../conexion.php'; 
+  $id = $_GET["id"];
+  $consulta  = "SELECT * FROM categorias where id = $id";
+  $resultado = mysqli_query($mysqli, $consulta);
+  $fila = mysqli_fetch_array($resultado);
+?>
 
 <!--Estetica-->
 <div class="container mt-5">
 <div class = "row">
 <div class ="col-sm-12">
-  <form action="insertar_usuarios.php" method="post">
+  <form action="editar_categorias.php" method="post">
 
   <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="nombre" id="nombre" placeholder="Ingresa tu nombre">    
+      <input type="text" name="nombre" id="nombre" value="<?php echo $fila["nombre_titulo"]; ?>">    
+  </div>
+    
   </div>
 
-   <div class="form-group">
-      <label for="telefono">Telefono</label>
-      <input type="tel" name="telefono" id="nombre" placeholder="Ingresa tu telefono">    
-  </div>
-
-  <div class="form-group">
-      <label for="direccion">Direccion</label>
-      <input type="text" name="direccion" id="nombre" placeholder="Ingresa tu direccion">    
-  </div>
-
-   <div class="form-group">
-      <label for="correo">Correo electronico</label>
-      <input type="email" name="correo" id="nombre" placeholder="Ingresa tu correo">    
-  </div>
-
-  <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type='password' name="password" class="form-control" id="nombre" placeholder="Ingresa tu contraseña">    
-  </div>
+  <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
 
 <div class="form-group">
   <input type="submit"  name="btnEnviar" value ="Registra a tu usuario" class="btn btn-success">  
