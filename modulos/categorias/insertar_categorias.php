@@ -13,10 +13,15 @@ $status = $_POST['status'];
 $consulta ="INSERT INTO categorias (id, nombre_titulo, status) 
 	VALUES ('$id','$nombre_titulo','$status')";
 
-echo $consulta;
-
 //Ejecutar la consulta
 mysqli_query($mysqli, $consulta);
+
+session_start();
+$nombre_usuario = $_SESSION["nombre"];
+$sp_call = "CALL sp_prueba('categorias','Se ha agregado el registro de la tabla categorias con el valor $nombre_titulo. Agregado por $nombre_usuario')";
+mysqli_query($mysqli, $sp_call);
+
+
 //Regresar al Index
 header("Location: index.php")
 

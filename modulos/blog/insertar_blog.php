@@ -16,6 +16,14 @@ $consulta ="INSERT INTO blog (titulo, descripcion, fecha, autor, id_cat_fk)
 
 //Ejecutar la consulta
 mysqli_query($mysqli, $consulta);
+
+
+session_start();
+$nombre_usuario = $_SESSION["nombre"];
+$sp_call = "CALL sp_prueba('blog','Se ha agregado el registro de la tabla blog con el valor $id. Agregado por $nombre_usuario')";
+mysqli_query($mysqli, $sp_call);
+
+
 //Regresar al Index
 header("Location: index.php");
 
